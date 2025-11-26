@@ -28,7 +28,5 @@ jobs:
           git config --global user.email "copybara-bot@example.com"
 
       - name: Run Copybara
-        env:
-          GITHUB_TOKEN: ${{ secrets.COPYBARA_GITHUB_TOKEN }}
         run: |
-          java -jar copybara_deploy.jar copy.bara.sky github_export --init-history
+          java -jar copybara_deploy.jar copy.bara.sky github_export --init-history --git-destination-url=${{ secrets.COPYBARA_GITHUB_URL }}
