@@ -29,4 +29,4 @@ jobs:
 
       - name: Run Copybara
         run: |
-          java -jar copybara_deploy.jar copy.bara.sky github_export --init-history --git-destination-url=${{ secrets.COPYBARA_GITHUB_URL }}
+          java -jar copybara_deploy.jar .github/copy.bara.sky github_export --init-history --git-destination-url=${{ secrets.COPYBARA_GITHUB_URL }}
