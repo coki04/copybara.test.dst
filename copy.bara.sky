@@ -4,9 +4,9 @@ core.workflow(
         url = "https://github.com/coki04/copybara.test",
         ref = "main",
     ),
-    destination = git.github_pr_destination(
-        url = "https://$GITHUB_TOKEN@github.com/coki04/copybara.test.dst",
-        destination_ref = "main",
+    destination = git.destination(
+        url = "overridden",
+        push = "main",
     ),
     authoring = authoring.pass_thru("COPYBARA <copybara@example.com>"),
 )
