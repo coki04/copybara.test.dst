@@ -1,0 +1,34 @@
+name: Copybara Sync
+
+on:
+  workflow_dispatch:     # manual trigger
+  push:
+    branches: ["main"]   # auto-trigger on changes
+
+jobs:
+  run-copybara:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Download Copybara
+        run: curl -LO https://github.com/google/copybara/releases/latest/download/copybara_deploy.jar
+
+      - name: Set Git identity
+        run: |
+          git config --global user.name "Copybara Bot"
+          git config --global user.email "copybara-bot@example.com"
+
+      - name: Run Copybara
+        env:
+          GITHUB_TOKEN: ${{ secrets.COPYBARA_GITHUB_TOKEN }}
+        run: |
+          java -jar copybara_deploy.jar copy.bara.sky github_export --init-history
